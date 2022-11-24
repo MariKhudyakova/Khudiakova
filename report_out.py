@@ -1,4 +1,5 @@
 import csv
+import os
 import sys
 import datetime
 from datetime import datetime
@@ -281,7 +282,7 @@ class Report:
 
         for i in range(2, len(self.sheet2['E']) + 1):
             self.sheet2[f'E{i}'].number_format = FORMAT_PERCENTAGE_00
-        self.wb.save('report.xlsx')
+        # self.wb.save('report.xlsx')
 
     @staticmethod
     def set_border(ws, side):
@@ -380,6 +381,7 @@ class Report:
                                         'names_sheet2': names_sheet2})
         config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
         pdfkit.from_string(pdf_template, 'report.pdf', configuration=config, options={"enable-local-file-access": ""})
+        os.remove('graph.png')
 
 
 def output(data_vacancies, profession_name, column_names):
@@ -399,11 +401,12 @@ def output(data_vacancies, profession_name, column_names):
     return data
 
 
-users_input = UsersInput()
-dataset = DataSet(users_input.file_name)
-(column_names, vacancies_data) = dataset.columns_names, dataset.vacancies_data
-output_data = output(vacancies_data, users_input.profession_name, column_names)
-report = Report(output_data, users_input.profession_name)
-report.generate_excel()
-report.generate_image()
-report.generate_pdf()
+def get_report():
+    users_input = UsersInput()
+    dataset = DataSet(users_input.file_name)
+    (column_names, vacancies_data) = dataset.columns_names, dataset.vacancies_data
+    output_data = output(vacancies_data, users_input.profession_name, column_names)
+    report = Report(output_data, users_input.profession_name)
+    report.generate_excel()
+    report.generate_image()
+    report.generate_pdf()
