@@ -51,6 +51,11 @@ currency_to_rub = {'AZN': 35.68,
 
 
 def bool_converter(data):
+    """Осуществляет конвертацию логических (bool) значений.
+
+    Returns:
+        bool or str: Конвертированное значение
+    """
     if data == 'True':
         return 'Да'
     elif data == 'False':
@@ -63,6 +68,11 @@ def bool_converter(data):
 
 
 def get_key(val, dic):
+    """Осуществляет получение в словане ключа по значению.
+
+    Returns:
+        str: Ключ полученного словаря по полученному значению
+    """
     for key, value in dic.items():
         if val == value:
             return key
@@ -70,7 +80,19 @@ def get_key(val, dic):
 
 
 class DataSet:
+    """Класс для чтения csv файла.
+
+    Attributes:
+        reader (list[list[str]]): Построчно прочитанный csv файл
+        columns_names (list[str]): Названия столбцов (первая строка csv файла)
+        vacancies_data (list[list[str]]): Список из объеков строк (остальные строки csv файла)
+    """
     def __init__(self, file_name):
+        """Инициализирует объекты DataSet, записывает данные построчно в список списков.
+
+        Args:
+            file_name (str): Название csv файла
+        """
         if '.' not in file_name:
             print('Ошибка в названии файла')
             sys.exit()
@@ -86,6 +108,24 @@ class DataSet:
 
 
 class Vacancy:
+    """Класс для форматирования значений словаря каждой вакансии.
+
+    Attributes:
+        name (str): Название
+        description (str): Описание
+        key_skills (str or list): Навыки
+        experience_id (str): Опыт работы
+        premium (str): Премиум-вакансия
+        employer_name (str): Компания
+        salary_from (int or float): Нижняя граница вилки оклада
+        salary_to (int or float): Верхняя граница вилки оклада
+        salary_gross (str): Оклад указан до вычета налогов
+        salary_currency (str): Идентификатор валюты оклада
+        area_name (str): Название региона
+        full_published_time (str): Дата публикации вакансии (год, месяц, день, час, минута, секунда)
+        published_at (str): Дата публикации вакансии (ДД.ММ.ГГГГ)
+        salary (str): Оклад
+    """
     name: str
     description: str
     key_skills: str or list
@@ -102,12 +142,22 @@ class Vacancy:
     salary: str
 
     def __init__(self, vacancy):
+        """Инициализирует объекты Vacancy, форматирует значения.
+
+        Args:
+            vacancy (dict): объект одной вакансии
+        """
         for key, value in vacancy.items():
             self.__setattr__(key, self.formatter(key, value))
 
         self.salary = f'{self.salary_from} - {self.salary_to} ({self.salary_currency}) ({self.salary_gross})'
 
     def formatter(self, key, value):
+        """Осуществляет форматирование полученное значения.
+
+        Returns:
+            str or bool or dict: Отформатированное значение
+        """
         if key == 'key_skills' and type(value) == list:
             return '\n'.join(value)
         elif key == 'premium':
@@ -126,6 +176,11 @@ class Vacancy:
         return value
 
     def check_filter_cond(self, filter_param):
+        """Осуществляет проверку корретности названия файла.
+
+        Returns:
+            dict or bool: Название файла
+        """
         if filter_param == '':
             return True
 
@@ -142,16 +197,20 @@ class Vacancy:
         return self.__dict__[get_key(filter_field, rus_names)] == filter_value
 
 
-class Salary:
-    def __init__(self, salary_from, salary_to, salary_gross, salary_currency):
-        self.salary_from = salary_from
-        self.salary_to = salary_to
-        self.salary_gross = salary_gross
-        self.salary_currency = salary_currency
-
-
 class UsersInput:
+    """Класс для пользовательского ввода.
+
+    Attributes:
+        file_name (str): Название файла
+        filter_param (str): Параметр фильтрации
+        sort_param (str): Параметр сортировки
+        is_reverse_sort (str): Обратный порядок сортировки (Да / Нет)
+        interval (str): Диапазон вывода
+        column_names (str): Требуемые столбцы
+    """
     def __init__(self):
+        """Инициализирует объекты UsersInput, выполняет проверку на корректность введенные данные.
+        """
         self.file_name = input('Введите название файла: ')
         self.filter_param = input('Введите параметр фильтрации: ')
         self.sort_param = input('Введите параметр сортировки: ')
@@ -165,6 +224,11 @@ class UsersInput:
 
     @staticmethod
     def check_sort_param(sort_param):
+        """Осуществляет проверку корретности параметра сортировки.
+
+        Returns:
+            str: Параметр сортировки
+        """
         if sort_param not in rus_names.values() and sort_param != '':
             print('Параметр сортировки некорректен')
             sys.exit()
@@ -172,6 +236,11 @@ class UsersInput:
 
     @staticmethod
     def check_filter_param(filter_param):
+        """Осуществляет проверку корретности параметра фильтрации.
+
+        Returns:
+            str: Параметр фильтрации
+        """
         if ': ' not in filter_param and filter_param != '':
             print('Формат ввода некорректен')
             sys.exit()
@@ -182,6 +251,11 @@ class UsersInput:
 
     @staticmethod
     def check_names(list_column_names):
+        """Осуществляет проверку корретности требуемых столбцов.
+
+        Returns:
+            list: Названия столбцов
+        """
         if '' in list_column_names:
             list_column_names = ['Название', 'Описание', 'Навыки', 'Опыт работы', 'Премиум-вакансия', 'Компания', 'Оклад', 'Название региона', 'Дата публикации вакансии']
         list_column_names.insert(0, '№')
@@ -189,6 +263,11 @@ class UsersInput:
 
     @staticmethod
     def check_is_reverse_sort(is_reverse_sort):
+        """Осуществляет проверку корретности порядока сортировки.
+
+        Returns:
+            bool: Порядок сортировки
+        """
         if is_reverse_sort == '':
             is_reverse_sort = False
         else:
@@ -200,13 +279,22 @@ class UsersInput:
 
 
 class Table:
+    """Класс для создания таблицы с помощью модуля PrettyTable.
+
+    Attributes:
+        table (PrettyTable): Таблица
+    """
     def __init__(self):
+        """Инициализирует объекты Table, задает некоторые параметры таблицы.
+        """
         self.table = PrettyTable(['№', 'Название', 'Описание', 'Навыки', 'Опыт работы', 'Премиум-вакансия', 'Компания', 'Оклад', 'Название региона', 'Дата публикации вакансии'])
         self.table.align = 'l'
         self.table.hrules = 1
         self.table.max_width = 20
 
     def print(self, data_vacancies, start, end, column_names):
+        """Выводит вакансии в виде таблицы.
+        """
         for i, vacancy in enumerate(data_vacancies):
             row = [i + 1]
             for name in self.table.field_names[1:]:
@@ -220,6 +308,11 @@ class Table:
 
 
 def get_vacancies(data_vacancies, filter_param, sort_param, is_reverse_sort, column_names):
+    """Формирует сортированный, фильтрованный список вакансий.
+
+    Returns:
+        list: Список вакансий
+    """
     filtered_vacancies = []
     for data_vacancy in data_vacancies:
         parsed_data_vacancies = Vacancy(dict(zip(column_names, map(del_extra, data_vacancy))))
@@ -229,6 +322,11 @@ def get_vacancies(data_vacancies, filter_param, sort_param, is_reverse_sort, col
 
 
 def vacancies_sorter(data_vacancies, sort_param, is_reverse_sort):
+    """Получает сортированный список значений.
+
+    Returns:
+        list: Сортированный список значений
+    """
     if sort_param == '':
         return data_vacancies
     data_vacancies = get_sorted_vacancies(data_vacancies, sort_param, is_reverse_sort)
@@ -236,6 +334,11 @@ def vacancies_sorter(data_vacancies, sort_param, is_reverse_sort):
 
 
 def get_sorted_vacancies(data_vacancies, sort_param, is_reverse_sort):
+    """Осуществляет сортировку по параметру.
+
+    Returns:
+        list: Сортированный список значений
+    """
     if sort_param in ['Название', 'Описание', 'Компания', 'Название региона']:
         data_vacancies.sort(key=lambda vacancy: vacancy.__getattribute__(get_key(sort_param, rus_names)), reverse=is_reverse_sort)
     elif sort_param == 'Дата публикации вакансии':
@@ -251,6 +354,11 @@ def get_sorted_vacancies(data_vacancies, sort_param, is_reverse_sort):
 
 
 def del_extra(text):
+    """Осуществляет удаление лишних данных (HTML тегов).
+
+    Returns:
+        list[str]: Список нужных данных в виде строк
+    """
     text = re.sub('<.*?>', '', text)
     text = text.replace('\r\n', '\n')
     result = [' '.join(word.split()) for word in text.split('\n')]
@@ -258,11 +366,18 @@ def del_extra(text):
 
 
 def print_vacancies(data_vacancies, interval, column_names):
+    """Осуществляет вывод вакансий в таблице.
+    """
     if len(data_vacancies) == 0:
         print('Ничего не найдено')
         sys.exit()
 
     def cut_params(num_vac, interval):
+        """Осуществляет нахождение интервала с какой по какую вакансию выводить.
+
+        Returns:
+            list: Начало, конец интервала
+        """
         if interval == '':
             start, end = 0, num_vac
         elif interval.isnumeric():
@@ -279,6 +394,8 @@ def print_vacancies(data_vacancies, interval, column_names):
 
 
 def get_table():
+    """Осуществляет создание табличных данных.
+    """
     users_input = UsersInput()
     dataset = DataSet(users_input.file_name)
     (column_names, vacancies_data) = dataset.columns_names, dataset.vacancies_data
