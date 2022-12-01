@@ -14,7 +14,15 @@ import pdfkit
 
 
 class UsersInput:
+    """Класс для пользовательского ввода.
+
+    Attributes:
+        file_name (str): Название файла
+        profession_name (str): Название професии
+    """
     def __init__(self):
+        """Инициализирует объекты UsersInput, выполняет проверку на корректность введенные данные.
+        """
         self.file_name = input('Введите название файла: ')
         self.profession_name = input('Введите название профессии: ')
 
@@ -23,6 +31,11 @@ class UsersInput:
 
     @staticmethod
     def check_file_name(file_name):
+        """Осуществляет проверку корретности названия файла.
+
+        Returns:
+            str: Название файла
+        """
         if file_name == '' or '.' not in file_name:
             print('Некорректное название файла')
             sys.exit()
@@ -30,6 +43,11 @@ class UsersInput:
 
     @staticmethod
     def check_profession_name(profession_name):
+        """Осуществляет проверку корретности названия профессии.
+
+        Returns:
+            str: Название профессии
+        """
         if profession_name == '':
             print('Некорректное название профессии')
             sys.exit()
@@ -37,7 +55,19 @@ class UsersInput:
 
 
 class DataSet:
+    """Класс для чтения csv файла.
+
+    Attributes:
+        reader (list[list[str]]): Построчно прочитанный csv файл
+        columns_names (list[str]): Названия столбцов (первая строка csv файла)
+        vacancies_data (list[list[str]]): Список из объеков строк (остальные строки csv файла)
+    """
     def __init__(self, file_name):
+        """Инициализирует объекты DataSet, записывает данные построчно в список списков.
+
+        Args:
+            file_name (str): Название csv файла
+        """
         self.reader = [row for row in csv.reader(open(file_name, encoding='utf_8_sig'))]
         if len(self.reader) == 0:
             print('Пустой файл')
@@ -51,21 +81,27 @@ class DataSet:
 
 
 class Vacancy:
-    name: str
-    salary_from: int or float
-    salary_to: int or float
-    salary_currency: str
-    area_name: str
-    published_at: str
-    salary: str
+    """Класс для форматирования значений словаря вакансии.
 
+    Attributes:
+        vacancy (dict): объект одной вакансии
+    """
     def __init__(self, vacancy):
+        """Инициализирует объекты Vacancy, форматирует оклад и дату публикации.
 
+        Args:
+            vacancy (dict): объект одной вакансии
+        """
         for key, value in vacancy.items():
             self.__setattr__(key, self.formatter(key, value))
 
     @staticmethod
     def formatter(key, value):
+        """Осуществляет форматирование нижней и верхней граница вилки оклада, даты публикации вакансии.
+
+        Returns:
+            float or int: Отформатированное значение
+        """
         if key in ['salary_from', 'salary_to']:
             return float(value)
         if key == 'published_at':
@@ -73,37 +109,64 @@ class Vacancy:
         return value
 
 
-class Salary:
-    def __init__(self, salary_from, salary_to, salary_currency):
-        self.salary_from = salary_from
-        self.salary_to = salary_to
-        self.salary_currency = salary_currency
-
-
 class SalaryDict:
+    """Класс для выполнения действий над окладом.
+
+    Attributes:
+        salary_dict (dict): Словарь оклада
+        __aver_salary_dict (dict): Словарь усредненного оклада
+    """
     def __init__(self):
+        """Инициализирует объекты SalaryDict.
+        """
         self.salary_dict = {}
         self.__aver_salary_dict = {}
 
     def add_salary(self, key, salary):
+        """Осуществляет добавление значения оклада по ключу.
+
+        Returns:
+            dict: Словарь оклада
+        """
         if self.salary_dict.get(key) is None:
             self.salary_dict[key] = []
         return self.salary_dict[key].append(salary)
 
     def get_aver_salary(self):
+        """Осуществляет устреднение значений словаря оклада.
+
+        Returns:
+            dict: Словарь усредненного оклада
+        """
         for key, value in self.salary_dict.items():
             self.__aver_salary_dict[key] = int(mean(value))
         return self.__aver_salary_dict
 
 
 class CountDict:
+    """Класс для выполнения действий над городами.
+
+    Attributes:
+        length (int): Длина
+        count_dict (): Счетчик по значениям
+        big_cities (): Города с наибольшим количеством вакансий
+        top_proportion_dict (): Словарь пропорций по убыванию
+    """
     def __init__(self):
+        """Инициализирует объекты CountDict.
+        """
         self.length = 0
         self.count_dict = {}
         self.big_cities = []
         self.top_proportion_dict = {}
 
     def add(self, key):
+        """Осуществляет счетчик уникальных городов.
+
+        Returns:
+            dict: Cчетчик уникальных городов
+            int: Количество всех городов
+        """
         if self.count_dict.get(key) is None:
             self.count_dict[key] = 0
         self.count_dict[key] += 1
@@ -111,6 +174,11 @@ class CountDict:
         return
 
     def get_proportion(self):
+        """Осуществляет вычисление доли вакансий по городам.
+
+        Returns:
+            dict: Города в порядке убывания доли вакансий в них, только первые 10 значений
+        """
         proportion_dict = {}
         for key, value in self.count_dict.items():
             proportion = value / self.length
@@ -123,7 +191,20 @@ class CountDict:
 
 
 class ParseData:
+    """Класс для обработки статистических данных для аттрибутов.
+
+    Attributes:
+        salary_lvl_by_year (SalaryDict): Динамика уровня зарплат по годам
+        count_vac_by_year (CountDict): Динамика количества вакансий по годам
+        salary_lvl_by_year_for_prof (SalaryDict): Динамика уровня зарплат по годам для выбранной профессии
+        count_vac_by_year_for_prof (CountDict): Динамика количества вакансий по годам для выбранной профессии
+        salary_lvl_by_city (SalaryDict): Уровень зарплат по городам
+        vacancy_rate_by_city (CountDict): Доля вакансий по городам
+        currency_to_rub (dict): Значения для конвертации других валют в рубли
+    """
     def __init__(self):
+        """Инициализирует объекты ParseData.
+        """
         self.salary_lvl_by_year = SalaryDict()
         self.count_vac_by_year = CountDict()
         self.salary_lvl_by_year_for_prof = SalaryDict()
@@ -142,6 +223,11 @@ class ParseData:
                                 'UZS': 0.0055}
 
     def get_data(self, vacancies, prof):
+        """Осуществляет обработку статистических данных.
+
+        Returns:
+            list: Статистические данные
+        """
         for vacancy in vacancies:
             vacancy_salary = (vacancy.salary_from + vacancy.salary_to) / 2 * self.currency_to_rub[vacancy.salary_currency]
             self.salary_lvl_by_year.add_salary(vacancy.published_at, vacancy_salary)
@@ -179,6 +265,12 @@ class ParseData:
 
     @staticmethod
     def get_top_aver_salary(list_all_salary):
+        """Осуществляет сортировку по убыванию усредненного оклада.
+
+        Returns:
+            list: Оклад
+            list: Не подходящие города
+        """
         dic_average = []
         dic_town_count = {}
         for i in range(len(list_all_salary.salary_dict)):
@@ -211,6 +303,11 @@ class ParseData:
 
     @staticmethod
     def get_top_rate_by_city(vacancy_rate_by_city):
+        """Осуществляет сортировку доли вакансий по городам.
+
+        Returns:
+            list: Доли вакансий по убыванию (только первые 10 значений)
+        """
         s = vacancy_rate_by_city.length
         list_del_town = []
         for i in reversed(range(len(list_del_town))):
@@ -225,12 +322,37 @@ class ParseData:
             if proportion >= 0.01:
                 proportion_dict[key] = round(proportion, 4)
 
-        sorted_dict = sorted(proportion_dict.items(), key=lambda row: row[1], reverse=True)
-        return sorted_dict[:10]
+        sorted_list = sorted(proportion_dict.items(), key=lambda row: row[1], reverse=True)
+        return sorted_list[:10]
 
 
 class Report:
+    """Класс для формирования графиков и отчетов.
+
+    Attributes:
+        salary_lvl_by_year (SalaryDict): Динамика уровня зарплат по годам
+        count_vac_by_year (CountDict): Динамика количества вакансий по годам
+        salary_lvl_by_year_for_prof (SalaryDict): Динамика уровня зарплат по годам для выбранной профессии
+        count_vac_by_year_for_prof (CountDict): Динамика количества вакансий по годам для выбранной профессии
+        salary_lvl_by_city (SalaryDict): Уровень зарплат по городам
+        vacancy_rate_by_city (CountDict): Доля вакансий по городам
+        prof (str): Название профессии
+        wb (Workbook): Объект книги (контейнер для всех остальных частей XLSX-документа)
+        sheet1 (Worksheet): Лист для статистики по годам
+        sheet2 (Worksheet): Лист для статистики по городам
+        fig (Figure): область Figure (внешний контейнер для графики matplotlib)
+        ax1 (): Добавленная к Figure область Axes (график уровеня зарплат по годам)
+        ax2 (): Добавленная к Figure область Axes (график количества вакансий по годам)
+        ax3 (): Добавленная к Figure область Axes (график уровеня зарплат по городам)
+        ax4 (): Добавленная к Figure область Axes (график количества вакансий по городам)
+    """
     def __init__(self, data, prof):
+        """Инициализирует объекты Report.
+
+        Args:
+            data (list): Статистика вакансий
+            prof (str): Название профессии
+        """
         self.salary_lvl_by_year = data[0]
         self.count_vac_by_year = data[1]
         self.salary_lvl_by_year_for_prof = data[2]
@@ -255,6 +377,12 @@ class Report:
         self.ax4.set_title('Доля вакансий по городам')
 
     def generate_excel(self):
+        """Осуществляет генерацию данных ecxel файла, содержащего две вкладки
+        "Статистика по годам" и "Статистика по городам".
+
+        Returns:
+            : Данные для ecxel файл
+        """
         names_sheet1 = ['Год', 'Средняя зарплата', f'Средняя зарплата - {self.prof}',
                         'Количество вакансий', f'Количество вакансий - {self.prof}']
         names_sheet2 = ['Город', 'Уровень зарплат', 'Город', 'Доля вакансий']
@@ -282,15 +410,18 @@ class Report:
 
         for i in range(2, len(self.sheet2['E']) + 1):
             self.sheet2[f'E{i}'].number_format = FORMAT_PERCENTAGE_00
-        # self.wb.save('report.xlsx')
 
     @staticmethod
     def set_border(ws, side):
+        """Добавляет границы для ячеек.
+        """
         for cell in ws._cells.values():
             cell.border = Border(top=side, bottom=side, left=side, right=side)
 
     @staticmethod
     def column_width(ws):
+        """Устанавливает ширину ячейки.
+        """
         dims = {}
         for row in ws.rows:
             for cell in row:
@@ -300,6 +431,11 @@ class Report:
             ws.column_dimensions[col].width = value + 2
 
     def generate_image(self):
+        """Осуществляет генерацию png файла с четырмя графиками (уровня зарплат/вакансий, по годам/городам).
+
+        Returns:
+            : png файл
+        """
         width_12 = 0.4
         x_nums_1 = np.arange(len(self.salary_lvl_by_year.keys()))
         x_list1_1 = x_nums_1 - width_12 / 2
@@ -359,6 +495,11 @@ class Report:
         plt.savefig('graph.png')
 
     def generate_pdf(self):
+        """Осуществляет генерацию pdf файла, содержащего графики из generate_image и данные в таблице из generate_excel.
+
+        Returns:
+            : pdf файл
+        """
         env = Environment(loader=FileSystemLoader('.'))
         template = env.get_template('pdf_template.html')
         names_sheet1 = ['Год', 'Средняя зарплата', f'Средняя зарплата - {self.prof}',
@@ -385,6 +526,11 @@ class Report:
 
 
 def output(data_vacancies, profession_name, column_names):
+    """Осуществляет сборку и вывод статистических данных.
+
+    Returns:
+        list: Статистические данные
+    """
     all_data_vacancies = []
     for data_vacancy in data_vacancies:
         data_vacancy = Vacancy(dict(zip(column_names, data_vacancy)))
@@ -402,6 +548,8 @@ def output(data_vacancies, profession_name, column_names):
 
 
 def get_report():
+    """Осуществляет создание статистических данных.
+    """
     users_input = UsersInput()
     dataset = DataSet(users_input.file_name)
     (column_names, vacancies_data) = dataset.columns_names, dataset.vacancies_data
