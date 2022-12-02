@@ -1,7 +1,7 @@
 # Khudiakova
 
 <p>Замер времени выполнения существующей функции преобразования даты и времени:</p>
-![image](https://user-images.githubusercontent.com/59433521/205352912-43fec36c-b425-497c-afad-6157c154a572.png)
+<img scr="https://user-images.githubusercontent.com/59433521/205352912-43fec36c-b425-497c-afad-6157c154a572.png">
 <p>Созданы функции date_time1, date_time2, date_time3 (варианты форматирования даты и времени).</p>
 <p>Замер времени выполнения:</p>
 ![image](https://user-images.githubusercontent.com/59433521/205353177-ca6312e2-d5bd-4a49-b76b-9dc47eb4c4dc.png)
