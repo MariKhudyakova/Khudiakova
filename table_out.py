@@ -1,8 +1,6 @@
 import csv
 import re
-import datetime
 import sys
-from datetime import datetime
 from prettytable import PrettyTable
 
 rus_names = {'name': 'Название',
@@ -107,6 +105,27 @@ class DataSet:
             sys.exit()
 
 
+# def date_time1(value):
+#     full_published_time = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S%z').strftime('%d.%m.%Y-%H:%M:%S')
+#     return full_published_time, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S%z').strftime('%d.%m.%Y')
+
+
+# def date_time2(value):
+#     # 2022-06-27T17:33:08+0300
+#     full_published_time = f'{value[8:10]}.{value[5:7]}.{value[0:4]}-{value[11:13]}:{value[14:16]}:{value[17:19]}'
+#     published_time = f'{value[8:10]}.{value[5:7]}.{value[0:4]}'
+#     return full_published_time, published_time
+
+
+# def date_time3(value):
+#     date_time = value.split('T')
+#     date = date_time[0].split('-')
+#     time = date_time[1][:-5].split(':')
+#     full_date_time = f'{date[0]}.{date[1]}.{date[2]}-{time[0]}:{time[1]}:{time[2]}'
+#     published_time = f'{date[0]}.{date[1]}.{date[2]}'
+#     return full_date_time, published_time
+
+
 class Vacancy:
     """Класс для форматирования значений словаря каждой вакансии.
 
@@ -171,8 +190,10 @@ class Vacancy:
         elif key in ['salary_to', 'salary_from']:
             return '{:,}'.format(int(float(value))).replace(',', ' ')
         elif key == 'published_at':
-            self.full_published_time = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S%z').strftime('%d.%m.%Y-%H:%M:%S')
-            return datetime.strptime(value, '%Y-%m-%dT%H:%M:%S%z').strftime('%d.%m.%Y')
+            # 2022-06-27T17:33:08+0300
+            self.full_published_time = f'{value[8:10]}.{value[5:7]}.{value[0:4]}-{value[11:13]}:{value[14:16]}:{value[17:19]}'
+            published_time = f'{value[8:10]}.{value[5:7]}.{value[0:4]}'
+            return published_time
         return value
 
     def check_filter_cond(self, filter_param):
