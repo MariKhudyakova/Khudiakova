@@ -1,8 +1,6 @@
 import csv
 import os
 import sys
-import datetime
-from datetime import datetime
 from statistics import mean
 from openpyxl import Workbook
 from openpyxl.styles import Font, Border, Side
@@ -105,7 +103,7 @@ class Vacancy:
         if key in ['salary_from', 'salary_to']:
             return float(value)
         if key == 'published_at':
-            return int(datetime.strptime(value, '%Y-%m-%dT%H:%M:%S%z').strftime('%Y'))
+            return int(f'{value[0:4]}')
         return value
 
 
