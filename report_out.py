@@ -146,9 +146,9 @@ class CountDict:
 
     Attributes:
         length (int): Длина
-        count_dict (): Счетчик по значениям
-        big_cities (): Города с наибольшим количеством вакансий
-        top_proportion_dict (): Словарь пропорций по убыванию
+        count_dict (dict): Счетчик по значениям
+        big_cities (list): Города с наибольшим количеством вакансий
+        top_proportion_dict (dict): Словарь пропорций по убыванию
     """
     def __init__(self):
         """Инициализирует объекты CountDict.
