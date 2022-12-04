@@ -197,10 +197,10 @@ class Vacancy:
         return value
 
     def check_filter_cond(self, filter_param):
-        """Осуществляет проверку корретности названия файла.
+        """Осуществляет проверку соответствия вакансии фильтру.
 
         Returns:
-            dict or bool: Название файла
+            bool: Корректность (true - подходит, false - не подходит)
         """
         if filter_param == '':
             return True
@@ -397,7 +397,7 @@ def print_vacancies(data_vacancies, interval, column_names):
         """Осуществляет нахождение интервала с какой по какую вакансию выводить.
 
         Returns:
-            list: Начало, конец интервала
+            list: Начало, конец
         """
         if interval == '':
             start, end = 0, num_vac
