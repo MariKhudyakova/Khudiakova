@@ -1,5 +1,15 @@
 # Khudiakova
 
+## Задание 2.3.2
+На пяти функциях были реализованны два варианта тестирования, на doctest и модульных тестах
+![image](https://user-images.githubusercontent.com/59433521/205510840-7503298e-59e7-4783-a109-e458074641be.png)
+![image](https://user-images.githubusercontent.com/59433521/205510845-3d750196-1c25-4d79-b8ab-4ff902f44719.png)
+![image](https://user-images.githubusercontent.com/59433521/205510852-a37020dd-8bd9-4820-a857-1f3734bab7fa.png)
+![image](https://user-images.githubusercontent.com/59433521/205510864-dd6e3b7c-dcb9-4561-98ca-80a6a947a534.png)
+![image](https://user-images.githubusercontent.com/59433521/205510869-3f544031-01c4-4cb2-ad4c-6c0ec206eb79.png)
+
+
+## Задание 2.3.3
 Замер времени выполнения существующей функции преобразования даты и времени:
 ![image](https://user-images.githubusercontent.com/59433521/205352912-43fec36c-b425-497c-afad-6157c154a572.png)
 Созданы функции date_time1, date_time2, date_time3 (варианты форматирования даты и времени). 
