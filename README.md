@@ -16,3 +16,7 @@
 Замер времени выполнения:
 ![image](https://user-images.githubusercontent.com/59433521/205353177-ca6312e2-d5bd-4a49-b76b-9dc47eb4c4dc.png)
 ![image](https://user-images.githubusercontent.com/59433521/205353202-ea0ca18b-17ae-493e-9d2c-fa8b873ae49a.png)
+
+## Задание 3.2.1
+![image](https://user-images.githubusercontent.com/59433521/206869896-273e5c63-c800-4ca5-926a-f2f70af15e20.png)
+
