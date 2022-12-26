@@ -42,4 +42,3 @@
 ## Задание 3.3.1
 Частотность с которой встречаются различные валюты:
 ![image](https://user-images.githubusercontent.com/59433521/209561541-8bed0ec0-00ff-476d-a43d-07b7023e92ed.png)
-
