@@ -45,7 +45,7 @@
 
 ![image](https://user-images.githubusercontent.com/59433521/209561541-8bed0ec0-00ff-476d-a43d-07b7023e92ed.png)
 
-Итоговый dataframe:
+Итоговый dataframe (в файле [currency_data.csv](https://github.com/MariKhudyakova/Khudiakova/blob/main/currency_data.csv)):
 
 ![image](https://user-images.githubusercontent.com/59433521/209573550-adf89ff0-50de-42e1-9cdb-a58a7f2ee2cb.png)
 
