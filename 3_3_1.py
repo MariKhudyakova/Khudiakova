@@ -32,5 +32,4 @@ for year in range(2003, 2023):
         df_api_currency.loc[i] = [date, BYR, USD, EUR, KZT, UAH]
         i += 1
 
-df_api_currency.to_csv("сurrency_data.csv", index=False)
-print(df_api_currency)
+df_api_currency.to_csv("currency_date.csv", index=False)
