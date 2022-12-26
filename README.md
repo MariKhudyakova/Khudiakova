@@ -19,6 +19,7 @@
 ## Задание 2.3.3
 Замер времени выполнения существующей функции преобразования даты и времени:
 ![image](https://user-images.githubusercontent.com/59433521/205352912-43fec36c-b425-497c-afad-6157c154a572.png)
+
 Созданы функции date_time1, date_time2, date_time3 (варианты форматирования даты и времени). 
 Замер времени выполнения:
 ![image](https://user-images.githubusercontent.com/59433521/205353177-ca6312e2-d5bd-4a49-b76b-9dc47eb4c4dc.png)
@@ -45,5 +46,6 @@
 ![image](https://user-images.githubusercontent.com/59433521/209561541-8bed0ec0-00ff-476d-a43d-07b7023e92ed.png)
 
 Итоговый dataframe:
+
 ![image](https://user-images.githubusercontent.com/59433521/209573172-617ac25c-cb4a-44f5-8c4c-b6bbfad6dc65.png)
 
