@@ -5,6 +5,7 @@
 ### [• 2.3.3](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-233)
 ### [• 3.2.1](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-321)
 ### [• 3.2.2, 3.2.3](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-322-323)
+### [• 3.3.1](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-331)
 
 ## Задание 2.3.2
 На пяти функциях были реализованны два варианта тестирования, на doctest и модульных тестах:
@@ -37,3 +38,8 @@
 ![image](https://user-images.githubusercontent.com/59433521/209548120-d2c5c76f-9b85-4082-b73a-018811a1e530.png)
 
 Программа с использованием concurrent.futures (Process) выполняется за наименьшее время, оставляем её.
+
+## Задание 3.3.1
+Частотность с которой встречаются различные валюты:
+![image](https://user-images.githubusercontent.com/59433521/209561541-8bed0ec0-00ff-476d-a43d-07b7023e92ed.png)
+
