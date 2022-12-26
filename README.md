@@ -43,3 +43,7 @@
 Частотность с которой встречаются различные валюты:
 
 ![image](https://user-images.githubusercontent.com/59433521/209561541-8bed0ec0-00ff-476d-a43d-07b7023e92ed.png)
+
+Итоговый dataframe:
+![image](https://user-images.githubusercontent.com/59433521/209573172-617ac25c-cb4a-44f5-8c4c-b6bbfad6dc65.png)
+
