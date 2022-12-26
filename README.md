@@ -7,7 +7,7 @@
 ### [• 3.2.2](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-322)
 
 ## Задание 2.3.2
-На пяти функциях были реализованны два варианта тестирования, на doctest и модульных тестах
+На пяти функциях были реализованны два варианта тестирования, на doctest и модульных тестах:
 ![image](https://user-images.githubusercontent.com/59433521/205510840-7503298e-59e7-4783-a109-e458074641be.png)
 ![image](https://user-images.githubusercontent.com/59433521/205510845-3d750196-1c25-4d79-b8ab-4ff902f44719.png)
 ![image](https://user-images.githubusercontent.com/59433521/205510852-a37020dd-8bd9-4820-a857-1f3734bab7fa.png)
