@@ -30,5 +30,5 @@
 Время работы программы без многопроцессорной обработки - 19.186 сек
 ![image](https://user-images.githubusercontent.com/59433521/209532910-e11574f6-29d2-48b9-8c00-186acfe2e85e.png)
 
-Время работы программы с использованием multiprocessing -  сек
+Время работы программы с использованием multiprocessing - 13.869 сек
 ![image](https://user-images.githubusercontent.com/59433521/209532615-03abbe30-9364-47c8-b8ea-bebb617c1d7a.png)
