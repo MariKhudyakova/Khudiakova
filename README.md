@@ -47,5 +47,6 @@
 
 Итоговый dataframe:
 
-![image](https://user-images.githubusercontent.com/59433521/209573172-617ac25c-cb4a-44f5-8c4c-b6bbfad6dc65.png)
+![image](https://user-images.githubusercontent.com/59433521/209573550-adf89ff0-50de-42e1-9cdb-a58a7f2ee2cb.png)
+
 
