@@ -4,7 +4,7 @@
 ### [• 2.3.2](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-232)
 ### [• 2.3.3](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-233)
 ### [• 3.2.1](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-321)
-### [• 3.2.2](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-322)
+### [• 3.2.2, 3.2.3](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-322)
 
 ## Задание 2.3.2
 На пяти функциях были реализованны два варианта тестирования, на doctest и модульных тестах:
@@ -26,9 +26,14 @@
 ## Задание 3.2.1
 ![image](https://user-images.githubusercontent.com/59433521/206869896-273e5c63-c800-4ca5-926a-f2f70af15e20.png)
 
-## Задание 3.2.2
+## Задание 3.2.2, 3.2.3
 Время работы программы без многопроцессорной обработки - 19.186 сек
 ![image](https://user-images.githubusercontent.com/59433521/209532910-e11574f6-29d2-48b9-8c00-186acfe2e85e.png)
 
 Время работы программы с использованием multiprocessing - 13.869 сек
 ![image](https://user-images.githubusercontent.com/59433521/209532615-03abbe30-9364-47c8-b8ea-bebb617c1d7a.png)
+
+Время работы программы с использованием concurrent.futures (Process) - 12.445 сек
+![image](https://user-images.githubusercontent.com/59433521/209548120-d2c5c76f-9b85-4082-b73a-018811a1e530.png)
+
+Программа с использованием concurrent.futures (Process) выполняется за наименьшее время, оставляем её.
