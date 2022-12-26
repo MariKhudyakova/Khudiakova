@@ -1,8 +1,8 @@
 import pandas as pd
-from multiprocessing import Process, Queue
+from concurrent import futures
 
 
-def analysis_statistics(vacancy, year, queue):
+def analysis_statistics(vacancy, year):
     st_df = pd.read_csv(f'csv_files\\part_{year}.csv')
     st_df.loc[:, 'salary'] = st_df.loc[:, ['salary_from', 'salary_to']].mean(axis=1)
     st_df_vacancy = st_df[st_df["name"].str.contains(vacancy)]
@@ -17,8 +17,7 @@ def analysis_statistics(vacancy, year, queue):
     salary_lvl_year_prof[year] = int(st_df_vacancy['salary'].mean())
     count_vac_year_prof[year] = len(st_df_vacancy)
 
-    st_list = [salary_lvl_year, count_vac_year, salary_lvl_year_prof, count_vac_year_prof]
-    queue.put(st_list)
+    return [salary_lvl_year, count_vac_year, salary_lvl_year_prof, count_vac_year_prof]
 
 
 if __name__ == "__main__":
@@ -70,21 +69,13 @@ if __name__ == "__main__":
         salary_lvl_by_city[city] = int(df_city['salary'].mean())
         vacancy_rate_by_city[city] = round(len(df_city) / len(df), 4)
 
-    statistics = []
-    queue = Queue()
-    processes = []
+    executor = futures.ProcessPoolExecutor()
     for year in years:
-        process = Process(target=analysis_statistics, args=(vacancy, year, queue))
-        processes.append(process)
-        process.start()
-
-    for process in processes:
-        statistics = queue.get()
+        statistics = executor.submit(analysis_statistics, vacancy, year).result()
         salary_lvl_by_year.update(statistics[0])
         count_vac_by_year.update(statistics[1])
         salary_lvl_by_year_for_prof.update(statistics[2])
         count_vac_by_year_for_prof.update(statistics[3])
-        process.join()
 
     print("Динамика уровня зарплат по годам:", salary_lvl_by_year)
     print("Динамика количества вакансий по годам:", count_vac_by_year)
