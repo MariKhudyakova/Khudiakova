@@ -3,12 +3,6 @@ import math
 from numpy import mean
 
 
-pd.set_option("expand_frame_repr", False)
-df = pd.read_csv("vacancies_dif_currencies.csv")
-df_date = pd.read_csv("currency_date.csv")
-df.insert(1, "salary", "NaN")
-
-
 def get_salary(salary_from, salary_to, salary_currency, date):
     date = date[1] + "/" + date[0]
 
@@ -28,8 +22,14 @@ def get_salary(salary_from, salary_to, salary_currency, date):
         return mean([salary_from, salary_to]) * salary_currency_coef
 
 
+pd.set_option("expand_frame_repr", False)
+df = pd.read_csv("vacancies_dif_currencies.csv")
+df_date = pd.read_csv("currency_date.csv")
+df.insert(1, "salary", "NaN")
+
 df["salary"] = df.apply(lambda row: get_salary(row["salary_from"], row["salary_to"], row["salary_currency"], row["published_at"][:7].split("-")), axis=1)
 df.pop('salary_from')
 df.pop('salary_to')
 df.pop('salary_currency')
 # df[:100].to_csv("vacancies_with_one_currency.csv", index=False)
+# первые 100 результатов в формате CSV в файле vacancies_with_one_currency.csv
