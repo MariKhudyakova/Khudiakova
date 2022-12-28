@@ -351,8 +351,6 @@ if __name__ == "__main__":
         print("Динамика количества вакансий по годам:", count_vac_by_year)
         print("Динамика уровня зарплат по годам для профессии:", salary_lvl_by_year_for_prof)
         print("Динамика количества вакансий по годам для профессии:", count_vac_by_year_for_prof)
-        print("Уровень зарплат по городам (в порядке убывания):", sort_area_dict(salary_lvl_by_city))
-        print("Доля вакансий по городам (в порядке убывания):", sort_area_dict(vacancy_rate_by_city))
         return [salary_lvl_by_year, count_vac_by_year, salary_lvl_by_year_for_prof, count_vac_by_year_for_prof, sort_area_dict(salary_lvl_by_city), sort_area_dict(vacancy_rate_by_city)]
 
 
