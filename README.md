@@ -6,6 +6,7 @@
 ### [• 3.2.1](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-321)
 ### [• 3.2.2, 3.2.3](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-322-323)
 ### [• 3.3.1](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-331)
+### [• 3.5.2](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-352)
 
 ## Задание 2.3.2
 На пяти функциях были реализованны два варианта тестирования, на doctest и модульных тестах:
@@ -14,7 +15,6 @@
 ![image](https://user-images.githubusercontent.com/59433521/205510852-a37020dd-8bd9-4820-a857-1f3734bab7fa.png)
 ![image](https://user-images.githubusercontent.com/59433521/205510864-dd6e3b7c-dcb9-4561-98ca-80a6a947a534.png)
 ![image](https://user-images.githubusercontent.com/59433521/205510869-3f544031-01c4-4cb2-ad4c-6c0ec206eb79.png)
-
 
 ## Задание 2.3.3
 Замер времени выполнения существующей функции преобразования даты и времени:
@@ -51,4 +51,3 @@
 
 ## Задание 3.5.2
 ![image](https://user-images.githubusercontent.com/59433521/210085409-b66f3801-26ab-4426-a70c-cebc87c4ee1a.png)
-
