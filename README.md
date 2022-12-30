@@ -7,6 +7,7 @@
 ### [• 3.2.2, 3.2.3](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-322-323)
 ### [• 3.3.1](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-331)
 ### [• 3.5.2](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-352)
+### [• 3.5.3](https://github.com/MariKhudyakova/Khudiakova/blob/main/README.md#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-353)
 
 ## Задание 2.3.2
 На пяти функциях были реализованны два варианта тестирования, на doctest и модульных тестах:
