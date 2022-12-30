@@ -52,3 +52,17 @@
 ## Задание 3.5.2
 Получившаяся БД
 ![image](https://user-images.githubusercontent.com/59433521/210097996-7e764204-b61a-482f-baa7-c4d944d0b7e5.png)
+
+## Задание 3.5.3
+БД (столбец years добавлен для удобства в 3.5.3):
+
+![image](https://user-images.githubusercontent.com/59433521/210104717-df307634-6a3e-491d-b7b7-5bba872b6f2c.png)
+
+Код и вывод:
+
+![image](https://user-images.githubusercontent.com/59433521/210105255-dd3b0e36-301c-46cb-b50d-e98e87c27a68.png)
+![image](https://user-images.githubusercontent.com/59433521/210105272-6ec8417b-0671-482b-b919-179187e2c8a2.png)
+![image](https://user-images.githubusercontent.com/59433521/210105283-dc1b04d6-f027-40fc-9e1a-9487744d85af.png)
+![image](https://user-images.githubusercontent.com/59433521/210105315-6bd3aa2f-d143-4e95-9ead-96b48b1c4edc.png)
+![image](https://user-images.githubusercontent.com/59433521/210105341-597d70aa-2df6-46f7-9744-f6ce9aa32be0.png)
+![image](https://user-images.githubusercontent.com/59433521/210105353-e2498884-9658-4b0d-b6b0-bfcd1b457214.png)
