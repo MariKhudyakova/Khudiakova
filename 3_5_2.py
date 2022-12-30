@@ -1,44 +1,43 @@
 import math
-from statistics import mean
 import pandas as pd
+from sqlalchemy import create_engine
 import sqlite3
 
 
-def get_salary(salary_from, salary_to, salary_currency, date):
-    date = date[1] + "/" + date[0]
+def get_salary(row):
+    salary_from = row.salary_from
+    salary_to = row.salary_to
+    salary_currency = row.salary_currency
+    salary = row.salary
+    if type(salary_currency) is str:
+        if not math.isnan(salary_from) and not math.isnan(salary_to):
+            salary = (salary_from + salary_to) / 2
+        elif not math.isnan(salary_from):
+            salary = salary_from
+        elif not math.isnan(salary_to):
+            salary = salary_to
+        if salary_currency != 'RUR' and salary_currency in ["BYR", "USD", "EUR", "KZT", "UAH"]:
+            date = f'{row.published_at[5:7]}/{row.published_at[:4]}'
+            ratio_cur = cur.execute(f"""select {salary_currency} from currency_date where date='{date}'""").fetchone()[0]
+            salary = salary * ratio_cur if ratio_cur is not None else float('NaN')
+        elif salary_currency != 'RUR':
+            salary = float('NaN')
+    return salary
 
-    salary_currency_coef = 0
-    if salary_currency == "RUR":
-        salary_currency_coef = 1
-    elif salary_currency != "RUR" and (salary_currency == salary_currency) and salary_currency in ["BYN", "BYR", "USD", "EUR", "KZT", "UAH"]:
-        salary_currency.replace("BYN", "BYR")
-        cursor.execute("SELECT * FROM currency_date WHERE date == :year_month", {"year_month": date})
-        salary_currency_coef = cursor.fetchall()[0][s_cur_to_digits[salary_currency]]
 
-    if not (math.isnan(salary_from)) and math.isnan(salary_to):
-        return salary_from * salary_currency_coef
-    elif math.isnan(salary_from) and not (math.isnan(salary_to)):
-        return salary_to * salary_currency_coef
-    elif not (math.isnan(salary_from)) and not (math.isnan(salary_to)):
-        return mean([salary_from, salary_to]) * salary_currency_coef
-
-
-s_cur_to_digits = {"BYR": 1, "USD": 2, "EUR": 3, "KZT": 4, "UAH": 5}
-df = pd.read_csv("vacancies_dif_currencies.csv")
-connection = sqlite3.connect("currency_date.db")
+conn = sqlite3.connect('currency_date.db')
+cur = conn.cursor()
+engine = create_engine('sqlite:///C:\\Users\\Home\\PycharmProjects\\Khudiakova\\currency_date.db')
+# pd.set_option('expand_frame_repr', False)
+file = 'vacancies_dif_currencies.csv'
+df = pd.read_csv(file)
+df.insert(1, 'salary', float('NaN'))
+df['salary'] = df.apply(lambda row: get_salary(row), axis=1)
+df.pop('salary_from')
+df.pop('salary_to')
+df.pop('salary_currency')
+df['published_at'] = df['published_at'].apply(lambda s: s[:7])
+connection = sqlite3.connect('vacancies_with_one_currency.db')
 cursor = connection.cursor()
-
-df["published_at"] = df["published_at"].apply(lambda date: date[:7])
-df.insert(1, "salary", df.apply(lambda row: get_salary(row["salary_from"], row["salary_to"], row["salary_currency"],
-                                                       row["published_at"].split("-")), axis=1))
-df.drop(["salary_from", "salary_to", "salary_currency"], axis=1, inplace=True)
-df = df[df["salary"].notnull()]
-df["salary"] = df["salary"].apply(lambda salary: int(salary))
-
-connection_new_table = sqlite3.connect("vacancies_with_one_currency.db")
-cursor_new_table = connection_new_table.cursor()
-df.to_sql(name="vacancies_with_one_currency", con=connection_new_table, if_exists='replace', index=False)
-cursor_new_table.execute("SELECT * FROM vacancies_with_one_currency")
-connection_new_table.commit()
-
-print("Худякова Мария Сергеевна")
+df.to_sql(name='vacancies_with_one_currency', con=connection, if_exists='replace', index=False)
+connection.commit()
