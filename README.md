@@ -50,4 +50,5 @@
 ![image](https://user-images.githubusercontent.com/59433521/209573550-adf89ff0-50de-42e1-9cdb-a58a7f2ee2cb.png)
 
 ## Задание 3.5.2
-![image](https://user-images.githubusercontent.com/59433521/210085409-b66f3801-26ab-4426-a70c-cebc87c4ee1a.png)
+Получившаяся БД
+![image](https://user-images.githubusercontent.com/59433521/210097996-7e764204-b61a-482f-baa7-c4d944d0b7e5.png)
